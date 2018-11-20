@@ -2,8 +2,7 @@ package com.ipiecoles.java.java220;
 
 import org.joda.time.LocalDate;
 
-import java.util.ArrayList;
-import java.util.Collection;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
