@@ -2,10 +2,11 @@ package com.ipiecoles.java.java220;
 import com.ipiecoles.java.java220.exceptions.TechnicienException;
 import org.joda.time.LocalDate;
 
+import java.lang.Comparable;
 import java.util.Objects;
 
 
-public class Technicien extends Employe implements Comparable {
+public class Technicien extends Employe implements Comparable<Technicien> {
     private Integer grade;
 
 
@@ -44,11 +45,6 @@ public class Technicien extends Employe implements Comparable {
 
 
     @Override
-    public int compareTo(Technicien o) {
-        return Integer.compare(o.getGrade(), this.grade);
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Technicien)) return false;
@@ -68,5 +64,17 @@ public class Technicien extends Employe implements Comparable {
         return "Technicien{" +
                 "grade=" + grade +
                 '}' + super.toString();
+    }
+
+    @Override
+    public int compareTo(Technicien o) {
+        //return Integer.compare(o.grade, this.grade);
+        if(grade < o.getGrade()) {
+            return -1;
+        }
+        else if (grade == o.getGrade()){
+            return 0;
+        }
+        return 1;
     }
 }

@@ -3,7 +3,10 @@ package com.ipiecoles.java.java220;
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class Manager extends Employe {
@@ -19,9 +22,10 @@ public class Manager extends Employe {
         this.equipe = equipe;
     }
 
-    public HashSet<Technicien> getEquipe() {
+    public HashSet<Technicien> getEquipe(){
         return equipe;
     }
+
 
     public void setEquipe(HashSet<Technicien> equipe) {
         this.equipe = equipe;
@@ -32,22 +36,22 @@ public class Manager extends Employe {
     }
 
     public void ajoutTechnicienEquipe(String nom, String prenom, String matricule, LocalDate date, Double salaire, Integer grade) {
-        Technicien technicien = new Technicien(nom, prenom, matricule, date, salaire, grade);
-        equipe.add(technicien);
+        this.ajoutTechnicienEquipe(new Technicien(nom, prenom, matricule, date, salaire, grade));
     }
+
     @Override
     public void setSalaire(Double salaire) {
-        super.setSalaire(salaire*Entreprise.INDICE_MANAGER + (salaire * (double)equipe.size() / 10));
+        super.setSalaire(salaire * Entreprise.INDICE_MANAGER + (salaire * (double) equipe.size() / 10));
     }
 
     @Override
     public void augmenterSalaire(Double pourcentage) {
         super.augmenterSalaire(pourcentage);
-        augmenterSalaireEquipe(pourcentage);
+        this.augmenterSalaireEquipe(pourcentage);
     }
 
     private void augmenterSalaireEquipe(Double pourcentage) {
-        for(Technicien technicien : equipe) {
+        for (Technicien technicien : equipe) {
             technicien.augmenterSalaire(pourcentage);
         }
     }
@@ -57,10 +61,11 @@ public class Manager extends Employe {
         return Entreprise.primeAnnuelleBase() + equipe.size() * Entreprise.PRIME_MANAGER_PAR_TECHNICIEN;
     }
 
-    public ArrayList<Technicien> equipeParGrade(){
-
-        return null;
+    public List<Technicien> equipeParGrade(){
+        return equipe.stream().sorted().collect(Collectors.toList());
     }
 
-
+    public Double salaireEquipeGrade1() {
+        return equipe.stream().filter(technicien -> technicien.getGrade().equals(1)).mapToDouble(t -> t.getSalaire()).sum();
+    }
 }

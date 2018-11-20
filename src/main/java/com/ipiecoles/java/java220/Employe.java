@@ -77,7 +77,7 @@ public abstract class Employe {
 
     @Override
     public String toString() {
-        return "Employe{" +
+        return " Employe{" +
                 "nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", matricule='" + matricule + '\'' +

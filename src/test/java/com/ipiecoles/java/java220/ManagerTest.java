@@ -224,9 +224,9 @@ public class ManagerTest {
         List liste = (List)listeTech;
         Assertions.assertThat(liste.size()).isEqualTo(3);
 
-        Assertions.assertThat(TestUtils.invokeGetter(liste.get(0), "grade")).isEqualTo(3);
+        Assertions.assertThat(TestUtils.invokeGetter(liste.get(0), "grade")).isEqualTo(1);
         Assertions.assertThat(TestUtils.invokeGetter(liste.get(1), "grade")).isEqualTo(2);
-        Assertions.assertThat(TestUtils.invokeGetter(liste.get(2), "grade")).isEqualTo(1);
+        Assertions.assertThat(TestUtils.invokeGetter(liste.get(2), "grade")).isEqualTo(3);
 
     }
 
